@@ -8,6 +8,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+
 // Routes
 const todos = require('./routes/api/todos')
 app.use('/api/todos', todos)

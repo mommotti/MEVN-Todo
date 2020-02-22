@@ -13,7 +13,9 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const todos = await loadTodosCollection()
     await todos.insertOne({
-        text: req.body.text,
+        title: req.body.title,
+        completed: false,
+        editing: false,
         createdAt: new Date()
     })
     res.status(201).send()
@@ -26,9 +28,19 @@ router.delete('/:id', async (req, res) => {
     res.status(204).send()
 })
 
+// Update Todo 
+router.patch('/:id', async (req, res) => {
+    const todos = await loadTodosCollection()
+    await todos.updateOne({ _id: mongodb.ObjectID(req.params.id) }, { $set: { "title": req.body.title } })
+    res.status(200).send()
+})
+
+
+// Connect to Todos collection
 async function loadTodosCollection() {
     const client = await mongodb.MongoClient.connect(`mongodb+srv://mommotti:${process.env.MONGO_PASSWD}@mommotticloud-dpwsv.mongodb.net/test?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
     return client.db('mern-todo').collection('todos')
 }
+
 module.exports = router
 
