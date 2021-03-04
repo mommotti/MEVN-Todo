@@ -38,8 +38,8 @@ router.patch('/:id', async (req, res) => {
 
 // Connect to Todos collection
 async function loadTodosCollection() {
-    const client = await mongodb.MongoClient.connect(`mongodb+srv://mommotti:${process.env.MONGO_PASSWD}@mommotticloud-dpwsv.mongodb.net/test?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
-    return client.db('mern-todo').collection('todos')
+    const client = await mongodb.MongoClient.connect(`mongodb+srv://woofbox:TCJoxxNpWrVPtFFl@cluster0.3cm0n.mongodb.net/woof-box?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
+    return client.db('woof-box').collection('todos')
 }
 
 module.exports = router
